@@ -9,7 +9,7 @@ router.get('/:urlId', async(req,res) => {
             urlId: req.params.urlId
         });
         if(url) {
-            url.click++;
+            url.clicks++;
             url.save();
             return res.redirect(url.origUrl);
         } else {
