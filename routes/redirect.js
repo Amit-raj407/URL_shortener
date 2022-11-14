@@ -8,16 +8,16 @@ let connection = mysql.createConnection(config);
 
 
 
-router.get('/:urlId', async(req,res) => {
+router.get('/:urlId', async(req,response) => {
     try {
         connection.query(`SELECT * from Urls where urlID = "${req.params.urlId}"`, (err, res, fields) => {
             if(err) throw err;
             console.log(res);
 
             if(res.length != 0 ) {
-                return res.redirect(res.origUrl) // ISSUE HERE
+                return response.redirect(res[0].origUrl) // ISSUE HERE
             } else {
-                res.status(404).json('NOT FOUND');
+                response.status(404).json('NOT FOUND');
             }
 
         })
@@ -31,7 +31,7 @@ router.get('/:urlId', async(req,res) => {
 
     } catch(err) {
         console.log(err);
-        res.status(500).json('Server Error');
+        response.status(500).json('Server Error');
     }
 })
 
