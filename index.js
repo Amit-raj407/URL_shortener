@@ -15,6 +15,11 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 
+app.get('/', (req,res) => {
+    res.send("URL_Shortener")
+})
+
+
 app.use('/',require('./routes/redirect'))
 app.use('/api', require('./routes/urls'));
 
